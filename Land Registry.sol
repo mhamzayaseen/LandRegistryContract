@@ -87,7 +87,6 @@ function sellerRegisters(  string memory _name, uint _age, string memory _city, 
 sellerregister[msg.sender]= true;
     sellerRegister[msg.sender]=sellerDetail( _name, _age, _city, _CNIC, _email);
     sellerAdd++;
-    landOwner[sellerAdd]=msg.sender;
     emit registration(msg.sender);
 }
 
@@ -106,7 +105,7 @@ emit reject(seller_id);
 
 function addLand(  address _landId, string memory _area, string memory _city, string memory _state, 
  uint _landPrice, uint _propertyPID ) public {
-     require(SellerisVerified(msg.sender), "you are not verified");
+     require(verifyFromInspector  (msg.sender), "you are not verified");
         require(sellerregister[msg.sender] , "you are not register");
     landAdd++;
     AddLand [msg.sender]=landRegistry (_landId, _area, _city, _state, _landPrice, _propertyPID);
